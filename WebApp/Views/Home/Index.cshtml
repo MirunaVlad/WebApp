@@ -1,0 +1,73 @@
+﻿@model WebApp.Models.Reviews
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Antrenori</h1>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Prenume</th>
+            <th>Nume</th>
+            <th>Numar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Antrenors)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Phone</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@using (@Html.BeginForm("AddReview", "Rating", FormMethod.Post, new { @class = "form", role = "form" }))
+{
+    <div class="d-flex flex-column w-25 mb-5">
+        <label for="antrenori">Alege un antrenor</label>
+
+        <select id="antrenori" name="antrenori">
+            @foreach (var item in Model.Antrenors)
+            {
+                <option value="@item.Id">@(item.FirstName + " " + item.LastName )</option>
+            }
+        </select>
+    </div>
+
+    <div class="d-flex flex-column w-25 mb-5">
+        <label for="clienti">Alege un client</label>
+        <select id="clienti" name="clienti">
+            @foreach (var item in Model.Clients)
+            {
+                <option value="@item.Id">@(item.FirstName + " " + item.LastName )</option>
+            }
+        </select>
+    </div>
+
+    <div class="d-flex flex-column w-25 mb-5">
+        <label for="nota">Alege o nota</label>
+        <select id="nota" name="nota">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+
+    <input type="submit" runat="server" value="Adauga review" class="btn btn-default" />
+}
+
